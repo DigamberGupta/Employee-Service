@@ -3,10 +3,10 @@ package com.digambergupta.employees.service.impl;
 import com.digambergupta.employees.converter.EmployeeDataConverter;
 import com.digambergupta.employees.dao.EmployeeRepository;
 import com.digambergupta.employees.domain.Employee;
+import com.digambergupta.employees.exception.ResourceNotFoundException;
 import com.digambergupta.employees.resource.EmployeeDTO;
 import com.digambergupta.employees.service.api.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,6 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return EmployeeDataConverter.convertAndJoin(
                 employeeRepository.findEmployeeByEmployeeId(employeeId)).orElseThrow(() ->
-                new ResourceNotFoundException("employeeId", null));
+                new ResourceNotFoundException("employeeId", employeeId));
     }
 }
