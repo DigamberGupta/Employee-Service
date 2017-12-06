@@ -57,7 +57,8 @@ public class EmployeeControllerAdvice extends ExceptionAdvice {
                                                                      HttpServletRequest request) {
         LOGGER.debug("Resource {} of type {} cannot be found", exception.getResourceId(), exception.getResourceType());
 
-        final ProblemDetail problem = new ProblemDetail("Resource not found", "Requested resource");
+        final ProblemDetail problem = new ProblemDetail("Resource not found", "Requested resource "
+                + exception.getResourceId() + " not found");
         problem.setType(exception.getResourceType());
         problem.setInstance(request.getRequestURI());
         problem.setStatus(HttpStatus.NOT_FOUND.value());
