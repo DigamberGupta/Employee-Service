@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet author="digamber" id="1">
+        <createTable tableName="employees">
+            <column name="employee_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthday" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="digamber" id="2">
+        <insert tableName="employees">
+            <column name="employee_id" value="2"/>
+            <column name="first_name" value="Vishal"/>
+            <column name="last_name" value="Singh"/>
+            <column name="birthday" value="1992-02-23"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="digamber" id="3">
+        <insert tableName="employees">
+            <column name="employee_id" value="3"/>
+            <column name="first_name" value="Lokesh"/>
+            <column name="last_name" value="Jadhav"/>
+            <column name="birthday" value="1992-10-25"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

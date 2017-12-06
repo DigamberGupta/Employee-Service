@@ -9,6 +9,11 @@ import com.digambergupta.employees.service.api.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * Service implementation class for {@link EmployeeService}
  *
@@ -32,9 +37,6 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public EmployeeDTO getEmployeeByEmployeeId(Long employeeId) {
-        Employee employee = new Employee(1L, "Digamber", "Gupta");
-
-        employeeRepository.save(employee);
 
         return EmployeeDataConverter.convertAndJoin(
                 employeeRepository.findEmployeeByEmployeeId(employeeId)).orElseThrow(() ->

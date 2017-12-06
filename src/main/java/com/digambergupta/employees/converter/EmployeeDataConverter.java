@@ -32,6 +32,7 @@ public class EmployeeDataConverter {
         employeeDTO.setEmployeeId(employee.getEmployeeId());
         employeeDTO.setEmployeeFirstName(employee.getFirstName());
         employeeDTO.setEmployeeLastName(employee.getLastName());
+        employeeDTO.setBirthday(employee.getBirthday());
 
         return Optional.of(employeeDTO);
     }
