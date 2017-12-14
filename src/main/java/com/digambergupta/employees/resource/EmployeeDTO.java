@@ -2,6 +2,8 @@ package com.digambergupta.employees.resource;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.sql.Date;
 
@@ -10,8 +12,9 @@ import java.sql.Date;
  *
  * @author Digamber Gupta
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class EmployeeDTO {
+public class EmployeeDTO extends ResourceSupport{
 
     private Long employeeId;
 

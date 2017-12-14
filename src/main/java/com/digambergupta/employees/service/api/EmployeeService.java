@@ -1,6 +1,8 @@
 package com.digambergupta.employees.service.api;
 
 import com.digambergupta.employees.resource.EmployeeDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 /**
  * Service Interface for EmployeeService
@@ -9,4 +11,8 @@ import com.digambergupta.employees.resource.EmployeeDTO;
 public interface EmployeeService {
 
     EmployeeDTO getEmployeeByEmployeeId(Long employeeId);
+
+    EmployeeDTO setEmployeeDetails(EmployeeDTO employee);
+
+    Page<EmployeeDTO> getEmployees(PageRequest pageRequest);
 }
