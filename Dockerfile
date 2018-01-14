@@ -1,5 +1,8 @@
 FROM openjdk:8-jdk-alpine
+MAINTAINER digambergupta
 VOLUME /tmp
-ARG employee_service
 ADD /target/*.jar employee_service.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/employee_service.jar"]
+
+#Java execution
+CMD ["java", "-Xmx200m", "-jar", "/employee_service.jar"]
+EXPOSE 8080
