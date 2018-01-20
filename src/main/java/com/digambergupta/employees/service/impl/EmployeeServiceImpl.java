@@ -36,8 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO getEmployeeByEmployeeId(Long employeeId) {
 
         return EmployeeDataConverter.convertAndJoin(
-                employeeRepository.findEmployeeByEmployeeId(employeeId)).orElseThrow(() ->
-                new ResourceNotFoundException("employeeId", employeeId));
+                employeeRepository.findEmployeeByEmployeeId(employeeId))
+                .orElseThrow(() -> new ResourceNotFoundException("employeeId", employeeId));
     }
 
     /**
@@ -53,8 +53,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         final Employee employeeDetail = employeeRepository.save(employee);
 
-        return EmployeeDataConverter.convertAndJoin(employeeDetail).orElseThrow(() ->
-                new ResourceNotFoundException("employee", employeeDTO));
+        return EmployeeDataConverter.convertAndJoin(employeeDetail)
+                .orElseThrow(() -> new ResourceNotFoundException("employee", employeeDTO));
     }
 
     /**
@@ -67,7 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Page<Employee> employees = employeeRepository.findAll(pageRequest);
 
 
-        return EmployeeDataConverter.covertAndJoinPage(employees).orElseThrow(() ->
-                new ResourceNotFoundException("employees", "employees"));
+        return EmployeeDataConverter.covertAndJoinPage(employees)
+                .orElseThrow(() -> new ResourceNotFoundException("employees", "employees"));
     }
 }

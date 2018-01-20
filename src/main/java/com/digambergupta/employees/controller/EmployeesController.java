@@ -40,7 +40,8 @@ public class EmployeesController {
     private EmployeeResourceAssembler employeeResourceAssembler;
 
     @Autowired
-    public EmployeesController(final EmployeeService employeeService, final EmployeeResourceAssembler employeeResourceAssembler) {
+    public EmployeesController(final EmployeeService employeeService,
+                               final EmployeeResourceAssembler employeeResourceAssembler) {
         this.employeeService = employeeService;
         this.employeeResourceAssembler = employeeResourceAssembler;
     }
@@ -59,8 +60,10 @@ public class EmployeesController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved", response = EmployeeDTO.class),
             @ApiResponse(code = 401, message = "Unauthorized", response = ProblemDetail.class),
-            @ApiResponse(code = 403, message = "This operation is forbidden for this user", response = ProblemDetail.class),
-            @ApiResponse(code = 404, message = "Employee with the given identifier is not found", response = ProblemDetail.class),
+            @ApiResponse(code = 403, message = "This operation is forbidden for this user",
+                    response = ProblemDetail.class),
+            @ApiResponse(code = 404, message = "Employee with the given identifier is not found",
+                    response = ProblemDetail.class),
             @ApiResponse(code = 500, message = "Unexpected Internal Error", response = ProblemDetail.class)})
     @RequestMapping(value = "/employee", method = RequestMethod.GET, produces = MediaTypes.HAL_JSON_VALUE)
     public HttpEntity<EmployeeDTO> getEmployeeById(@RequestParam(name = "employeeId") Long employeeId) {
