@@ -1,33 +1,38 @@
+kind: PersistentVolume
 apiVersion: v1
-kind: Service
 metadata:
-  name: mysql
+  name: pv-nfs
+  labels:
+    type: nfs
 spec:
-  ports:
-  - port: 3306
-  selector:
-    app: mysql
-  clusterIP: None
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    # TODO: modify path and server appropriately
+    path: /nfs
+    server: 192.168.2.197
 ---
-apiVersion: v1
+
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: mysql-pv-claim
+  name: mysql-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi
+      storage: 15Gi
 ---
-apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: mysql
 spec:
-  selector:
-    matchLabels:
-      app: mysql
   strategy:
     type: Recreate
   template:
@@ -51,5 +56,16 @@ spec:
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-pv-claim
-          
+          claimName: mysql-pvc
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
